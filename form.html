@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+    <!-- Form -->
+    <form>
+        <input type="text" placeholder="Full Name" name="username">
+        <input type="submit">
+    </form>
+
+    <!-- Text area -->
+    <div>
+        <input type="text" name="name" placeholder="Name">
+        <input type="password" name="password" placeholder="Password">
+    </div>
+
+    <!-- Multiple Choice buttons -->
+    <div>
+        Favorite color?
+        <input type="radio" name="color" value="red"> Red <!-- radio button -->
+        <input type="radio" name="color" value="green"> Green
+        <input type="radio" name="color" value="blue"> Blue
+        <input type="radio" name="color" value="other"> Other
+    </div>
+
+    <!-- Checkboxes -->
+    <div>
+        <input type="checkbox" name="vehicle" value="Bike"> I have a bike
+        <input type="checkbox" name="vehicle" value="Car"> I have a car
+    </div>
+
+    <!-- Dropdown -->
+    <div>
+        <select name="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+    </div>
+
+    <!-- List with certain options available -->
+    <div>
+        <input list="countries" name="country" placeholder="Country">
+        <datalist id="countries">
+            <option value="India">
+            <option value="USA">
+            <option value="UK">
+            <option value="Australia">
+        </datalist>
+    </div>
+
+</body>
+</html>
