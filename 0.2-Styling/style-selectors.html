@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello!</title>
+    <style>
+        /* Selectors */
+
+        /* Descendant selector */
+        ul > li { /* Only if there is a li child of a ul, that li (list element) will be blue */
+            color: blue;
+        }
+
+        /* Attribute selector */
+        a {
+            color: blue;
+        }
+        a[href="https://facebook.com"] {
+            color: yellow;
+        }
+
+        /* Pseudo-class selector */
+        button {
+            color: red;
+            width: 200px;
+            height: 50px;
+            font-size:24px;
+            background-color: green;
+        }
+        button:hover {
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>  <!--  -->
+<ol>
+    <li>First</li>
+    <li>Second</li>
+    <ul>
+        <li>Second First</li>
+        <li>Second Second</li>
+    </ul>
+    <li>Third</li>
+    <li><a href="https://facebook.com">Facebook</a></li>
+    <li><a href="https://google.com">Google here</a></li>
+
+    <button>Click me</button>
+</ol>
+</body>
+</html>
