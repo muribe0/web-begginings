@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Search</title>
-    <link rel="stylesheet" href="googleClone.css">
+    <link rel="stylesheet" href="basic.css">
 </head>
 <body>   <!-- When the form is submitted, the data should be sent to google.com/search -->
-    <div class="flexbox-container">
-        <header>
+<header>
+    <nav class="navbar">
+        <a href="#">Image Search</a>
+        <a href="#">Advanced Search</a>
+    </nav>
+</header>
 
-            <nav class="btn-index">
-                <button class="btn-index btn-link" >
-                    <a href="imageSearch.html">Image Search</a>
-                </button>
-                <button class="btn-link" href="advancedSearch.html">
-                    Advanced Search
-                </button>
-            </nav>
-
-        </header>
-
-        <div class="search-box">
-            <form action="https://www.google.com/search">
-                <input type="text" name="q" placeholder="Search...">
-                <input type="submit" value="Google Search">
-            </form>
-        </div>
+<div class="search-box">
+    <div class="img-box">
+        <img src="google.png" alt="doodle">
     </div>
+    <form action="https://www.google.com/search">
+        <input class="box" type="text" name="q" placeholder="Search...">
+        <input class="search-btn" type="submit" value="Google Search">
+    </form>
+    <div class="btns">
+        <button class="btn">
+            <a href="#">Image Search</a>
+        </button>
+        <button class="btn">
+            <a href="#">Advanced Search</a>
+        </button>
+    </div>
+
+</div>
 </body>
 </html>

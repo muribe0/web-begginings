@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+body {
+  height: 100%;
+  overflow: hidden; // Prevents scrolling
+}
+
+header {
+}
+
+.navbar {
+  background-color: #f0f0f0;
+  float: right;
+  padding: 20px; /* Adding some padding for better readability */
+}
+
+.navbar a {
+  position: relative;
+  padding: 0 15px; /* Adding padding around the links */
+  color: black;
+}
+
+.search-box {
+  clear: right;
+}
+
+.search-box {
+  text-align: center;
+
+  .img {
+    margin: 20px;
+  }
+
+  form {
+    margin: 20px;
+
+    .box .search-btn {
+      padding: 10px;
+    }
+  }
+
+  button {
+    padding: 5px;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
