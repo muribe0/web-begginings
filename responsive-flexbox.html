@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Page</title>
+    <style>
+        @media (min-width: 600px) { /*If the min-width of the page is 600px*/
+            body { /*make the body background color red*/
+                background-color: red;
+            }
+        }
+
+        @media (max-width: 599px) {
+            body {
+                background-color: blue;
+            }
+        }
+
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #container > div {
+            background-color: springgreen;
+            font-size: 20px;
+            margin: 20px;
+            padding: 20px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to my web page!</h1>
+    <div id="container">
+        <div>1. This is some sample text inside of div to demo Flexbox.</div>
+        <div>2. This is some sample text inside of div to demo Flexbox.</div>
+        <div>3. This is some sample text inside of div to demo Flexbox.</div>
+        <div>4. This is some sample text inside of div to demo Flexbox.</div>
+        <div>5. This is some sample text inside of div to demo Flexbox.</div>
+        <div>6. This is some sample text inside of div to demo Flexbox.</div>
+        <div>7. This is some sample text inside of div to demo Flexbox.</div>
+        <div>8. This is some sample text inside of div to demo Flexbox.</div>
+
+    </div>
+</body>
+</html>

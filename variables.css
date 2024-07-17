@@ -1,0 +1,21 @@
+ul {
+  font-size: 18px;
+  color: green;
+}
+
+ol {
+  font-size: 26px;
+  color: green;
+}
+
+div {
+  font-size: 28px;
+}
+div p {
+  color: blue;
+}
+div ul {
+  color: red;
+}
+
+/*# sourceMappingURL=variables.css.map */

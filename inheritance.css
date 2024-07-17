@@ -1,0 +1,23 @@
+.warning, .error, .succes { /*A generic message will be like this*/
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+}
+
+.succes {
+  /*Uses the css of %message*/
+  background-color: green;
+}
+
+.error {
+  background-color: red;
+}
+
+.warning {
+  background-color: orange;
+}
+
+/*# sourceMappingURL=inheritance.css.map */
