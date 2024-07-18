@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Advanced Search</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="up">
+        <a href="index.html">Google Search</a>
+    </div>
+    <div class="form-section">
+        <div><h1>Advanced Search</h1></div>
+        <hr>
+        <div class="title">
+            <h2>Find pages with...</h2>
+        </div>
+        <div class="filters">
+            <form class="filter" action="https://www.google.com/search"> <!--when the form is submitted, the data should be sent to https://www.google.com/search-->
+                <div class="filter-row">
+                    <p>all these words:</p>
+                    <input lass="filter-row" type="text" name="as_q" >
+                    <p class="explanation"> Type the important words: tri-colour rat terrier
+                    </p>
+                </div>
+                <div class="filter-row">
+                    <p>this exact word or phrase:</p>
+                    <input type="text" name="as_epq" >
+                    <p class="explanation"> Put exact words in quotes: "rat terrier"
+                    </p>
+                </div>
+                <div class="filter-row">
+                    <p>any of these words:</p>
+                    <input type="text" name="as_oq" >
+                    <p class="explanation"> Type OR between all the words you want: miniature OR standard</p>
+                </div>
+                <div class="filter-row">
+                    <p>none of these words:</p>
+                    <input  type="text" name="as_eq" >
+                    <p class="explanation">Put a minus sign just before words that you don't want: -rodent, -"Jack Russell"</p>
+                </div>
+                <div class="filter-row">
+                    <p></p>
+                    <label><input type="submit" value="Advanced Search"></label>
+                </div>
+
+            </form>
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>
