@@ -1,6 +1,6 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/Django/my_venv
+\Django\my_venv
 # Editor-based HTTP Client requests
 /httpRequests/
