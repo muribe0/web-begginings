@@ -1,10 +1,12 @@
 {% extends "tasks/layout.html" %}
 {# Uses the structure of layout.html but puts this into that layout #}
 {% block body %}
-        <ul>
-                {% for task in tasks %}
-                        <li>{{ task }}</li>
-                {% endfor %}
-        </ul>
-        <a href="{% url 'tasks:add' %}">Add a New Task</a> <!-- This is a link to the add page. It's name in urls.py is add -->
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task }}</li>
+        {% empty %}
+            <li>No tasks.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'tasks:add' %}">Add a New Task</a> <!-- This is a link to the add page. It's name in urls.py is add -->
 {% endblock %}

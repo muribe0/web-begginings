@@ -337,3 +337,26 @@ See `index.html`, `layout.html` in the `tasks` folder.
 Post allows us to send data
 2. Since we are submitting data, we need to add a csrf token to the form.
 `{% csrf_token %}`. This allows us to submit the form, since before we were getting a 403 error.
+
+## Sessions
+
+A way for django to remember who you are and store data for your particular session.
+
+After modifying `index(request)` in `views.py` such that:
+```python
+def index(request):
+    if "tasks" not in request.session: # if the user does not have an empty list of tasks in their session, create one.
+        request.session["tasks"] = []
+    return render(request, "tasks/index.html", {
+        "tasks": request.session["tasks"],
+    })
+```
+we can see the next error when trying to acces the index page (tasks)
+
+![img.png](img.png)
+
+This is because we have not set-up the database or table.
+To do this, we use `python manage.py migrate` -> This will create the default database and the table for us.
+
+Now, after running the server, the page will load without any errors.
+
