@@ -20,4 +20,5 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', include('hello.urls')), # This is a path that will be used to access the hello app
+    path('newyear/', include('newyear.urls')), # This is a path that will be used to access the newyear app
 ]

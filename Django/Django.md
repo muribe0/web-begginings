@@ -29,7 +29,7 @@ The most common method used to retrieve data from a server. It is used to reques
    * `manage.py` - Used to run commands for the project
 
 Anytime you want to run the project:
-1. You run `source <env_name>/bin/activate` to activate the virtual environment in <env_name> folder. (my_venv)
+1. You run `Scripts/activate` to activate the virtual environment from the <env_name> folder. (my_venv)
 2. you run `python3 manage.py runserver` in <project_name> folder. (lecture3)
 
 ### Create an App
@@ -125,3 +125,128 @@ While `urls.py` in the <project_name> contains the urls for the entire project.
 -- Day 4 begins here --
 
 ## Templates
+
+Separate the response "the html" from the python code. Instead of returning a HttpResponse,
+we can return a render function that takes the request, the template file, and a dictionary
+of variables to pass to the template.
+
+1. Create a folder called `templates` in the `<app_name>` folder.
+2. Create a file called `index.html` in the `templates` folder.
+3. Add the following code to the `index.html` file:
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Hello</title>
+   </head>
+   <body>
+       <h1>Hello, world.</h1>
+   </body>
+   </html>
+   ```
+4. Update the `index()` function in the `views.py` file in the `<app_name>` folder to use the template:
+   ```python
+   from django.shortcuts import render
+   def index(request):
+       return render(request, 'hello/index.html') # <--- this is the change as opposed to httmlresponse
+   ``` 
+   
+    * `render()`: This function is used to render a template with the given context. It takes three arguments:
+    * `request`: The request object that represents the current HTTP request.
+    * `template_name`: The name of the template file to render.
+    * `context`: A dictionary containing the variables to pass to the template.
+    * The `render()` function loads the template file `hello/index.html` and returns an `HttpResponse` object with the rendered template content.
+
+### Another Example
+1. Create a new file called `greet.html` in the `templates` folder.
+2. Add the following code to the `greet.html` file:
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Greet</title>
+   </head>
+   <body>
+       <h1>Hello, {{ name }}.</h1>
+   </body>
+   </html>
+   ```
+   
+    * `{{ name }}`: This is a template variable that displays the value of the `name` variable passed to the template.
+3. Update the `greet()` function in the `views.py` file in the `<app_name>` folder to use the template:
+   ```python
+   def greet(request, name):
+       return render(request, 'hello/greet.html', {
+           'name': name,
+       })
+   ```
+   
+    * The `render()` function loads the template file `hello/greet.html` and passes the `name` variable to the template. The `name` variable is displayed in the template using the `{{ name }}` template variable.
+    * The `name` variable is passed to the template as a key-value pair in a dictionary. The key is the name of the variable in the template, and the value is the value of the variable.
+    * `render()` returns an `HttpResponse` object with the rendered template content.
+    
+
+### Another Example
+
+1. We will create a new app: `python manage.py startapp newyear`
+2. Add it to the installed apps in `settings.py` in the project folder.
+3. Add `urls.py` to the new app folder and add the following code:
+   ```python
+   from django.urls import path
+   from . import views
+
+   urlpatterns = [
+       path('', views.index, name='index'),
+   ]
+   ```
+4. Create a `views.py` file in the new app folder and add the following code:
+   ```python
+    from django.shortcuts import render
+    from datetime import datetime
+    def index(request):
+        now = datetime.now()
+        return render(request, "newyear/index.html", {
+            "newyear": now.month == 1 and now.day == 1 # This will return True if the current month is January and the current day is the first day of the month
+        })
+   ```
+5. Create a `templates` folder in the new app folder.
+6. Create an `index.html` file in the `templates` folder and add the following code:
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>New Year</title>
+   </head>
+   <body>
+       {% if newyear %}
+           <h1>Happy New Year!</h1>
+       {% else %}
+           <h1>Not New Year Yet</helse>
+       {% endif %}
+   </body>
+   </html>
+   ```
+   
+    * `{% if newyear %}`: This is a template tag that checks if the `newyear` variable is `True`. If it is `True`, the content inside the `{% if %}` block is displayed. If it is `False`, the content inside the `{% else %}` block is displayed.
+    * `{% endif %}`: This is a template tag that marks the end of the `{% if %}` block.
+
+7. Add the new app's URL patterns to the project's URL patterns in the `urls.py` file in the project folder
+   ```python
+   urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('hello/', include('hello.urls')), # This is a path that will be used to access the hello app
+    path('newyear/', include('newyear.urls')), # This is a path that will be used to access the newyear app
+    ]
+    ```
+   
+### Another example
+
