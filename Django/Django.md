@@ -160,6 +160,17 @@ of variables to pass to the template.
     * `context`: A dictionary containing the variables to pass to the template.
     * The `render()` function loads the template file `hello/index.html` and returns an `HttpResponse` object with the rendered template content.
 
+## About Render:
+
+The render function in Django is used to generate an HTML response by combining a given template with a context dictionary and returning an HttpResponse object with that rendered text. It takes the following arguments:
+
+1. `request`: The first argument is the HttpRequest object, which represents the current request.
+2. `template_name`: The second argument is a string representing the path to the template file relative to the templates directory.
+3. `context`: The third, optional argument is a dictionary representing the context to fill into the template. Each key in the dictionary becomes a variable in the template with its corresponding value.
+4. `content_type`: The fourth, optional argument is a string that represents the MIME type to use for the resulting document. Default is 'text/html'.
+5. `status`: The fifth, optional argument is an integer that represents the HTTP status code for the response. Default is 200.
+6. `using`: The sixth, optional argument is a string that represents the name of the template engine to use for loading the template.
+
 ### Another Example
 1. Create a new file called `greet.html` in the `templates` folder.
 2. Add the following code to the `greet.html` file:
@@ -261,4 +272,42 @@ of variables to pass to the template.
 
 4. Add style on `index.html` with this line `<link rel="stylesheet" href="{% static 'newyear\styles.css' %}">`
 5. Add some style to the `style.css` file in the `static/newyear` folder
+
+### Another example
+
+Tasks
+
+1. Create a new app called `tasks` using `python manage.py startapp tasks`
+2. Add the app to the installed apps in the `settings.py` file in the project folder.
+3. Create a `urls.py` file in the `tasks` folder and add the following code:
+   ```python
+   from django.urls import path
+   from . import views
+
+   urlpatterns = [
+       path('', views.index, name='index'),
+   ]
+   ```
+4. Add the `urls.py` file in the `tasks` folder to the project's URL patterns in the `urls.py` file in the project folder:
+   ```python
+   urlpatterns = [
+       path('admin/', admin.site.urls),
+       path('hello/', include('hello.urls')),
+       path('newyear/', include('newyear.urls')),
+       path('tasks/', include('tasks.urls')), # This is a path that will be used to access the tasks app
+   ]
+   ```    
+5. Add a `views.py` file in the `tasks` folder and add the following code:
+   ```python
+   from django.shortcuts import render
+   from datetime import datetime
+
+   # SOME CODE HERE
+   def index(request):
+       # SOME CODE HERE
+   ```
+6. Create a `templates` folder in the `tasks` folder. 
+7. Create `index.html` in `templates\tasks` folder.
+8. Create a `static` folder in the `tasks` folder.
+9. Create `styles.css` in the `static\tasks` folder.
 
