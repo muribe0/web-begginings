@@ -1,18 +1,9 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tasks</title>
-    <link rel="stylesheet" href="{% static 'tasks/styles.css' %}">
-</head>
-<body>
-    <h1>Tasks</h1>
+{% extends "tasks/layout.html" %}
+{# Uses the structure of layout.html but puts this into that layout #}
+{% block body %}
     <ul>
         {% for task in tasks %}
             <li>{{ task }}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

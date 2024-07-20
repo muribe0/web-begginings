@@ -324,3 +324,6 @@ Tasks
 8. Create a `static` folder in the `tasks` folder.
 9. Create `styles.css` in the `static\tasks` folder.
 
+### Template inheritance
+
+See `index.html`, `layout.html` in the `tasks` folder.
