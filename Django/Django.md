@@ -250,3 +250,15 @@ of variables to pass to the template.
    
 ### Another example
 
+1. We begin by creating the static folder inside of our app folder. For this example we use <newyear> as the <app_name>
+2. Inside the static folder, we create a new folder called <newyear> and inside of it, we create a new file called `style.css`.
+3. At the top of the `index.html` page in the `templates` folder, we add the following code:
+   ```html
+   {% load static %}
+   ```
+   
+    * `{% load static %}`: This template tag loads the static template tags that allow us to reference static files in our templates.
+
+4. Add style on `index.html` with this line `<link rel="stylesheet" href="{% static 'newyear\styles.css' %}">`
+5. Add some style to the `style.css` file in the `static/newyear` folder
+
