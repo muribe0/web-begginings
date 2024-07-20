@@ -327,3 +327,13 @@ Tasks
 ### Template inheritance
 
 See `index.html`, `layout.html` in the `tasks` folder.
+
+`<a href="{% url 'tasks:index' %}">View Tasks</a> <!-- tasks: is used to avoid colisions -->`
+
+### Form
+
+1. To really add a new tasks to the list, add an `action` to the form.
+`    <form action="{% url 'tasks:add' %}" method="post"`
+Post allows us to send data
+2. Since we are submitting data, we need to add a csrf token to the form.
+`{% csrf_token %}`. This allows us to submit the form, since before we were getting a 403 error.
