@@ -32,6 +32,19 @@ Anytime you want to run the project:
 1. You run `Scripts/activate` to activate the virtual environment from the <env_name> folder. (my_venv)
 2. you run `python3 manage.py runserver` in <project_name> folder. (lecture3)
 
+## If this does not work...
+a. A possible error is that of django not being recognised as installed, even though it is. 
+To install first activate the virtual environment and then run `pip3 install Django` to install Django in the virtual environment.
+If after doing that the error persists, make sure to try the next fix: 
+The error message indicates that Django is not found, even though you've installed it in a virtual environment (venv). This can happen if the Python interpreter being used to run manage.py is not the one associated with your activated virtual environment where Django is installed. To resolve this issue, ensure that your IDE (PyCharm) is configured to use the Python interpreter from the virtual environment where Django is installed. Here's how you can check and set the interpreter in PyCharm:  
+Open PyCharm and navigate to your project.
+Go to File > Settings (or PyCharm > Preferences on macOS).
+Under Project: your_project_name, click on Python Interpreter.
+Check the interpreter path listed. If it's not pointing to the interpreter inside your virtual environment, click on the gear icon, then Add....
+In the Add Python Interpreter window, select Existing environment, then click the ... button to browse and select the Python executable inside your virtual environment. This is usually located in a folder named venv or .venv within your project directory, under the Scripts (Windows) or bin (macOS/Linux) subdirectory.
+Select the Python executable (python.exe on Windows or just python on macOS/Linux) and click OK.
+Apply the changes and click OK to close the settings
+
 ### Create an App
 One project tends to have several different apps.
 
