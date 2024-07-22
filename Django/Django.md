@@ -360,3 +360,43 @@ To do this, we use `python manage.py migrate` -> This will create the default da
 
 Now, after running the server, the page will load without any errors.
 
+## Wiki
+
+### Workaround entries on index page
+
+Yes, the `{% url %}` template tag in Django can take additional parameters to dynamically construct URLs that require arguments. These arguments are passed to the URL pattern to generate a specific URL. For example, if you have a view that takes a parameter, like an entry name, you can pass this parameter to the `{% url %}` tag to generate a URL for that specific entry.
+
+Here's a step-by-step explanation on how to use `{% url %}` with parameters:
+
+1. **Define a URL Pattern with Parameters**: Ensure your `urls.py` includes a URL pattern that expects a parameter. For example, a pattern for viewing a specific entry might look like this:
+
+```python
+path('entries/<str:name>/', views.entry_detail, name='entry_detail'),
+```
+
+2. **Use `{% url %}` with Parameters in Your Template**: When you want to create a link to this view, use the `{% url %}` tag in your template and pass the required parameter. For instance, to create a link to an entry with the name "Django":
+
+```html
+<a href="{% url 'entry_detail' name='Django' %}">View Django Entry</a>
+```
+
+3. **Dynamic Parameters**: If the parameter value is stored in a variable, you can pass the variable to the `{% url %}` tag. Assuming you have a variable `entry_name` in your template context:
+
+```html
+<a href="{% url 'entry_detail' name=entry_name %}">View Entry</a>
+```
+
+This approach allows you to construct URLs dynamically based on the context or specific requirements, ensuring the URL is correctly formed according to your `urls.py` definitions.
+
+
+So for index.html I used:
+```html
+<ul>
+     {% for entry_name in entries %}
+         <li>
+             <a href="{% url 'loaded_entry' entry=entry_name %}">{{ entry_name }}</a>
+         </li>
+     {% endfor %}
+ </ul>
+```
+

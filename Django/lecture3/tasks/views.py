@@ -11,7 +11,7 @@ class NewTaskForm(forms.Form):
 
 # Create your views here.
 def index(request):
-    if "tasks" not in request.session: # if the user does not have an empty list of tasks in their session, create one.
+    if "tasks" not in request.session:  # if the user does not have an empty list of tasks in their session, create one.
         request.session["tasks"] = []
     return render(request, "tasks/index.html", {
         "tasks": request.session["tasks"],
@@ -23,7 +23,7 @@ def add(request):
         form = NewTaskForm(request.POST)  # request.POST contains all the data that the user submitted.
         if form.is_valid():
             task = form.cleaned_data["task"]
-            request.sessions["tasks"].append(task)  # append the task submitted to the list of tasks in the user's session.
+            request.session["tasks"] += [task]  # append the task submitted to the list of tasks in the user's session.
             return HttpResponseRedirect(reverse("tasks:index"))  # Redirects the user to the index page.
         else:
             return render(request, "tasks/add.html", {
@@ -31,7 +31,7 @@ def add(request):
             })
 
     return render(request, "tasks/add.html", {
-        "form": NewTaskForm(), # creates a new instance of the NewTaskForm class.
+        "form": NewTaskForm(),  # creates a new instance of the NewTaskForm class.
     })
 
 def add_form_not_working_yet(request):
