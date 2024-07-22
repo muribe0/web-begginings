@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from . import util
 
@@ -16,9 +16,10 @@ def search(request):
     if request.method == "POST":
         entry = request.POST.get("q")
         entries = util.list_entries()
-        if entry in entries:  # if it is an exact match
-            return visit_entry(request, entry)
-        else: # if it is a partial match
+        for e in entries:
+            if entry.lower() == e.lower():
+                return redirect(visit_entry, entry=e)
+        else:  # if it is a partial match
             partial_matches = [e for e in entries if entry.lower() in e.lower()]
             return index(request, partial_matches)
 
@@ -41,3 +42,7 @@ def visit_entry(request, entry):
 def visit_random_entry(request):
     entries = util.list_entries()
     return visit_entry(request, entries[randint(0, len(entries) - 1)])
+
+
+def create_entry(request):
+    return render(request, "encyclopedia/new_entry.html")
