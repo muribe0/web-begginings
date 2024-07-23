@@ -12,9 +12,9 @@ h1 {
     padding-top: 20px;
 }
 
-textarea {
-    height: 90vh;
-    width: 80%;
+.main .row > textarea {
+    max-height: 20vh !important;
+    width: 70% !important;
 }
 
 .main {

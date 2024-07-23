@@ -4,6 +4,13 @@
     Wiki - {{ title }}
 {% endblock %}
 
+{% block nav %}
+    <div style="margin-top: 10px">
+        <a href="{% url 'edit_entry' title=title %}">Edit Entry</a>
+    </div>
+
+{% endblock %}
+
 {% block body %}
     {{ entry_content|safe }}
 

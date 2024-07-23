@@ -12,6 +12,8 @@
             <li>
                 <a href="{% url 'loaded_entry' entry=entry_name %}">{{ entry_name }}</a>
             </li>
+        {% empty %}
+            No results found.
         {% endfor %}
     </ul>
 
