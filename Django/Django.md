@@ -400,3 +400,6 @@ So for index.html I used:
  </ul>
 ```
 
+### `mange.py makemigrations`
+
+This command is used to create new migrations based on the changes you've made to your models. Migrations are Django's way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema. They are designed to be human-readable and version-controlled.

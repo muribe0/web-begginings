@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>All Pages</h1>
+
+    <ul>
+        {% for entry_name in entries %}
+            <li>
+                <a href="{% url 'loaded_entry' entry=entry_name %}">{{ entry_name }}</a>
+            </li>
+        {% empty %}
+            No results found.
+        {% endfor %}
+    </ul>
+
+{% endblock %}
