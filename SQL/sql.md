@@ -491,5 +491,9 @@ so this tells dj that I'd like to use the admin app to edit the db as well
 
 I added some airports and a 3rd flight.
 
-Now we can make the webapp more sofisticadet.
+Now we can make the webapp more sofisticaded:
 
+### Passengers
+
+1. Added class `Passenger` with a many-to-many relationship with `Flight`
+2. Added `Passenger` to admin
