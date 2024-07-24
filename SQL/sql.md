@@ -433,7 +433,63 @@ class Flight(models.Model):
 'JFK'
 >>> lhr.arrivals.all()
 <QuerySet [<Flight: 1: New York (JFK) to London (LHR)>]>
+>>> Airport.objects.all()
+<QuerySet [<Airport: New York (JFK)>, <Airport: Paris (CDG)>, <Airport: Tokio (NRT)>, <Airport: London (LHR)>]>
+>>> Airport.objects.filter(city="New York")
+<QuerySet [<Airport: New York (JFK)>]>
+
 ```
 
 
+Now we edit the views such that:
+
+```python
+def index(request):
+    return render(request, "flights/index.html", {
+        "flights": Flight.objects.all(),
+    })
+```
+```html
+<ul>
+    {% for flight in flights %}
+        <li>
+            Flight {{flight.id}}: {{ flight.origin }} to {{ flight.destination }}
+        </li>
+    {% endfor %}
+</ul>
+```
+
+Coming back to shell
+
+```python
+>>> from flights.models import *
+>>> jfk = Airport.objects.get(city="New York")
+>>> cdg = Airport.objects.get(code="CDG")
+>>> f = Flight(origin=jfk, destination=cdg, duration=435)
+>>> f.save()
+```
+
+Now we have 2 flights in the database. We can see them in the webapp.
+
+## Django Admin
+
+We can create a superuser to access the admin page
+
+`python3 manage.py createsuperuser`
+
+To impact this in admin, we have to add the models to the admin.py file
+
+```python
+from django.contrib import admin
+from .models import *
+
+admin.site.register(Airport)
+admin.site.register(Flight)
+```
+
+so this tells dj that I'd like to use the admin app to edit the db as well
+
+I added some airports and a 3rd flight.
+
+Now we can make the webapp more sofisticadet.
 
