@@ -303,3 +303,137 @@ This query returns
 for each row in the `flights` table that has a corresponding row in the `passengers` table 
 where the `flight_id` of the `passengers` table matches the `id` of the `flights` table.
 
+|first|origin|destination
+|-----|------|----------
+|Alice|NY|London
+|Bob|New York|London
+|Charlie|Tokyo|San Francisco
+|David|Paris|New York
+|Eve|Sydney|Los Angeles
+
+
+CREATE INDEX
+Aditional data structure. Once it exist, it makes quering on a particular column much more efficient.
+I except that as i query this table, I will look passanger based on their last name
+
+```sqlite
+CREATE INDEX name_index ON passenger (last);
+```
+
+## SQL injection and vulnerabilities
+A SQL injection attack is when a malicious user enters SQL code as input on a site in order to bypass the sites security measures. For example, let’s say we have a table storing usernames and passwords, and then a login form on the home site of a page. We may search for the user using a query such as:
+
+```sqlite
+SELECT * FROM users
+WHERE username = username AND password = password;
+```
+
+A user named Harry might go to this site and type `harry` as a username and `12345` as a password, in which case the query would look like this:
+
+```sqlite
+SELECT * FROM users
+WHERE username = "harry" AND password = "12345";
+```
+
+A hacker, on the other hand, might type harry" -- as a username and nothing as a password. It turns out that -- stands for a comment in SQL, meaning the query would look like:
+
+```sqlite
+SELECT * FROM users
+WHERE username = "harry"--" AND password = "12345";
+```
+
+Because in this query the password checking has been commented out, the hacker can log into Harry’s account without knowing their password. To solve this problem, we can use:
+
+* Escape characters to make sure SQL treats the input as plain text and not as SQL code.
+* An abstraction layer on top of SQL which includes its own escape sequence, so we don’t have to write SQL queries ourselves.
+
+## SQL Race Conditions
+
+When two or more processes are trying to access and change the same data at the same. For example, from a phone and a computer
+
+# Django and SQL
+
+### Models
+Every model will be a python class
+
+
+### Migrations
+I create a migration to create instructions to how to manipulate the database and then I apply the migration to the database.
+
+`python3 manage.py makemigrations`
+
+This creates a model for the database. In the example, I create `Flight` model
+It has an id atribute: `('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'))`
+
+After that, we `python3 manage.py migrate` to apply the migration to the database.
+
+We have the option to excecute: `python3 manage.py shell`.
+This allows me to excecute commands on this webapp
+
+Example of shell commands:
+
+```python
+from flights.models import Flight
+f = Flight(origin="New York", destination="London", duration=415)
+f.save() # saves the new flight
+Flight.objects.all() # returns all flights
+```
+
+After editing the `models.py` such that:
+
+```python
+class Airport(models.Model):
+    code = models.CharField(max_length=3)
+    city = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f"{self.city} ({self.code})"
+
+
+class Flight(models.Model):
+    origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="departures")
+    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name="arrivals")
+    duration = models.IntegerField()
+
+    # on_delete = models.CASCADE -> if an airport is deleted, then all flights from or to that airport will also be
+    # deleted. related_name = "departures" -> allows us to access all flights that have a particular airport as their
+
+    # origin. so if I have an airport, I can access all flights that depart from that airport by calling
+    # airport.departures.all()
+
+    def __str__(self):
+        return f"{self.id}: {self.origin} to {self.destination}"
+
+```
+
+**We can `makemigrations` and `migrate` to go to the shell and test our db**
+
+
+```python
+>>> from flights.models import *
+>>> jfk = Airport(code="JFK", city="New York")
+>>> jfk
+<Airport: New York (JFK)>
+>>> jfk.save()
+>>> cdg = Airport(code="CDG", city="Paris")
+>>> nrt = Airport(code="NRT", city="Tokio")
+>>> lhr = Airport(code="LHR", city="London")
+>>> cdg.save()
+>>> nrt.save()
+>>> lhr.save()
+>>> f = Flight(origin=jfk, destination=lhr, duration=415)
+>>> f.save()
+>>> f
+<Flight: 1: New York (JFK) to London (LHR)>
+>>> f.origin
+<Airport: New York (JFK)>
+>>> f.origin.city
+'New York'
+>>> f.origin.code
+'JFK'
+>>> lhr.arrivals.all()
+<QuerySet [<Flight: 1: New York (JFK) to London (LHR)>]>
+```
+
+
+
