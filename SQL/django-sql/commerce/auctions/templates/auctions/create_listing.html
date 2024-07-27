@@ -22,7 +22,15 @@
     <div class="form-group">
         <input class="form-control" type="url" name="img_url" placeholder="URL">
     </div>
-    <input class="btn btn-primary" type="submit" value="Login">
+    <div class="form-group">
+        <select name="category">
+            {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Create listing">
 </form>
 
 

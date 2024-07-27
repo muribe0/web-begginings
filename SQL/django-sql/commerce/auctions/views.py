@@ -8,7 +8,9 @@ from .models import User, Listing
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    return render(request, "auctions/index.html", {
+        "listings": Listing.objects.all(),
+    })
 
 
 def login_view(request):
@@ -69,10 +71,22 @@ def create_listing(request):
         description = request.POST["description"]
         bid = request.POST["bid"]
         img_url = request.POST["img_url"]
-        listing = Listing(title=title, description=description, bid=bid, img_url=img_url)
+        category = request.POST.get("category")
+        user = request.user
+
+        if not isinstance(user, User):
+            return render(request, "auctions/create_listing.html", {
+                "message": "You must be logged in to create a listing.",
+                "categories": ["Fashion", "Toys", "Electronics", "Home", "Other"],
+            })
+
+        listing = Listing(title=title, description=description, bid=bid, img_url=img_url, category=category, user=user)
         listing.save()
         return render(request, "auctions/create_listing.html", {
-            "message": "Listing created."
+            "message": "Listing created.",
+            "categories": ["Fashion", "Toys", "Electronics", "Home", "Other"],
         })
 
-    return render(request, "auctions/create_listing.html")
+    return render(request, "auctions/create_listing.html", {
+        "categories": ["Fashion", "Toys", "Electronics", "Home", "Other"],
+    })
