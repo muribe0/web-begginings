@@ -18,5 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     });
 
+    // Choose a color
 
+    document.querySelector("select").onchange = function () {
+        update_color("#hello", this.value); // this.value is the value of the selected option
+    }
+
+    document.querySelector("#hello").onmouseover = function () {
+        this.style.color = "green";
+    };
 });
