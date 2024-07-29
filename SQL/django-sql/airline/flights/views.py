@@ -9,11 +9,11 @@ def index(request):
     })
 
 def flight(request, flight_id):
-    flight = Flight.objects.get(pk=flight_id) # get me the flight whose id (primary key) is equal to flight_id
+    flight = Flight.objects.get(pk=flight_id)  # get me the flight whose id (primary key) is equal to flight_id
     return render(request, "flights/flight.html", {
         "flight": flight,
         "passengers": flight.passengers.all(),  # possible because passengers has a related_name="passengers"
-        "non_passengers": Passenger.objects.exclude(flights=flight).all() # passengers who are not on this flight
+        "non_passengers": Passenger.objects.exclude(flights=flight).all()  # passengers who are not on this flight
     })
 
 def book(request, flight_id):

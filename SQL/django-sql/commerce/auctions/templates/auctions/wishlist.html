@@ -1,0 +1,42 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Watchlist
+{% endblock %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+    {% for listing in listings %}
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <!--IMG-->
+                    <img class="listing-img"  src="{{ listing.img_url }}" alt="Linting image">
+                </div>
+                <div class="col-8">
+                    <!--Listing-->
+                    <div class="row">
+                        <div class="col-11">
+                            <h3>{{ listing.title }}</h3>
+                            <p>{{ listing.description }}</p>
+                            <p>Current Price: ${{ listing.price }}</p>
+                            <p>Category: {{ listing.category }}</p>
+                            <p>Sumbited by: {{ listing.user.username }} </p>
+                        </div>
+                        <div class="col-1">
+                            <a href="{% url 'listing' listing.id %}" class="btn btn-primary">View</a>  <!-- Updated button -->
+                            <form action="{% url 'wishlist' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger" name="remove_wishlist" value="{{ listing.id }}">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% if message %}
+        {{ message }}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "auctions/layout.html" %}
+
+{% block navbar %}
+    <form action="{% url 'listing' listing.id %}" method="post">
+        {% csrf_token %}
+        {% comment %}This is for handling diferent post request in the same view{% endcomment %}
+        <button class="btn btn-secondary" name="add_wishlist">Add to Wishlist</button>
+        {% if in_wishlist %}
+            <button class="btn btn-secondary" name="remove_wishlist">Remove from Wishlist</button>
+        {% else %}
+            <button class="btn btn-secondary" disabled>Remove from Wishlist</button>
+        {% endif %}
+        {% if is_owner %}
+            <button class="btn btn-secondary" name="close">Close listing</button>
+        {% endif %}
+    </form>
+
+{% endblock %}
+
+
+{% block body %}
+    <h2>Listing {{ listing.title }}</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <!--IMG-->
+                <img class="listing-img"  src="{{ listing.img_url }}" alt="Linting image">
+            </div>
+            <div class="col-8">
+                <!--Listing-->
+                <div class="row">
+                    <div class="col-11">
+                        <h3>{{ listing.title }}</h3>
+                        <p>{{ listing.description }}</p>
+                        <p>Current Price: ${{ listing.price }}</p>
+                        <p>Category: {{ listing.category }}</p>
+                        <p>Sumbited by: {{ listing.user.username }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <h3>Bids</h3>
+                <ul>
+                    {% for bid in listing.bids.all %}
+                        <li>{{ bid.user.username }}: ${{ bid.amount }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-4">
+
+                <form action="{% url 'listing' listing.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" name="amount" placeholder="type bid">
+                    </div>
+                    {% comment %}This is for handling diferent post request in the same view{% endcomment %}
+                    <button type="submit" class="btn btn-primary" name="bid"
+                            {% if not listing.open %}
+                                disabled
+                            {% endif %}>Place bid</button>
+                    {% if message %}
+                    <div class="form-group">
+                        <strong>{{ message }}</strong>
+                    </div>
+                    {% endif %}
+                </form>
+
+            </div>
+        </div>
+        <div class="row"> {% comment %} Comments {% endcomment %}
+            <div class="row comments">
+                <h3 class="row-4">Comments</h3>
+                <form class="row-8" action="{% url 'listing' listing.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment" placeholder="Type your comment"></textarea>
+                        <button class="btn btn-secondary" name="post_comment">Post comment</button>
+                    </div>
+                </form>
+            </div>
+            <div class=" row">
+                {% for comment in comments %}
+                    <div class="col-2">
+                        <p>{{ comment.user.username }}</p>
+                    </div>
+                    <div class="col-10">
+                        <p>{{ comment.content }}</p>
+                    </div>
+                    {% empty %}
+                    <p>No comments yet</p>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

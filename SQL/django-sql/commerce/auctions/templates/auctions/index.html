@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-4">
                     <!--IMG-->
-                    <img style="max-width: 200px; max-height: 200px" src="{{ listing.img_url }}" alt="Linting image">
+                    <img class="listing-img"  src="{{ listing.img_url }}" alt="Linting image">
                 </div>
                 <div class="col-8">
                     <!--Listing-->
@@ -16,12 +16,12 @@
                         <div class="col-11">
                             <h3>{{ listing.title }}</h3>
                             <p>{{ listing.description }}</p>
-                            <p>Starting Bid: ${{ listing.bid }}</p>
+                            <p>Current Price: ${{ listing.price }}</p>
                             <p>Category: {{ listing.category }}</p>
-<!--                            <p>Sumbited by: {{ listing.user }} </p>-->
+                            <p>Sumbited by: {{ listing.user.username }} </p>
                         </div>
                         <div class="col-1">
-                            <button class="btn btn-primary">View</button>
+                            <a href="{% url 'listing' listing.id %}" class="btn btn-primary">View</a>  <!-- Updated button -->
                         </div>
                     </div>
                 </div>

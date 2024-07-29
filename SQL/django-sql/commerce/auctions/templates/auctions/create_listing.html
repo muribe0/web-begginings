@@ -10,25 +10,30 @@
 
 <form action="{% url 'create_listing' %}" method="post">
     {% csrf_token %}
-    <div class="form-group">
-        <input autofocus class="form-control" type="text" name="title" placeholder="Title">
-    </div>
-    <div class="form-group">
-        <textarea class="form-control" name="description" placeholder="Description"></textarea>
-    </div>
-    <div class="form-group">
-        <input class="form-control" type="number" name="bid" placeholder="Starting bid">
-    </div>
-    <div class="form-group">
-        <input class="form-control" type="url" name="img_url" placeholder="URL">
-    </div>
-    <div class="form-group">
-        <select name="category">
-            {% for cat in categories %}
-            <option value="{{ cat }}">{{ cat }}</option>
-            {% endfor %}
-        </select>
-    </div>
+    {% for field in form %}
+        <div class="form-group">
+            {{ field.as_field_group }}
+        </div>
+    {% endfor %}
+{#    <div class="form-group">#}
+{#        <input autofocus class="form-control" type="text" name="title" placeholder="Title">#}
+{#    </div>#}
+{#    <div class="form-group">#}
+{#        <textarea class="form-control" name="description" placeholder="Description"></textarea>#}
+{#    </div>#}
+{#    <div class="form-group">#}
+{#        <input class="form-control" type="number" name="bid" placeholder="Starting bid" value="0">#}
+{#    </div>#}
+{#    <div class="form-group">#}
+{#        <input class="form-control" type="url" name="img_url" placeholder="URL">#}
+{#    </div>#}
+{#    <div class="form-group">#}
+{#        <select name="category">#}
+{#            {% for cat in categories %}#}
+{#            <option value="{{ cat }}">{{ cat }}</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#    </div>#}
 
     <input class="btn btn-primary" type="submit" value="Create listing">
 </form>

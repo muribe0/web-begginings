@@ -27,6 +27,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'create_listing' %}">Create Listing</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'wishlist' %}">Wishlist</a>
+                </li>
+                {% block navbar %}
+                {% endblock %}
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'login' %}">Log In</a>
