@@ -29,7 +29,7 @@ The most common method used to retrieve data from a server. It is used to reques
    * `manage.py` - Used to run commands for the project
 
 Anytime you want to run the project:
-1. You run `Scripts/activate` to activate the virtual environment from the <env_name> folder. (my_venv)
+1. You run `source Scripts/activate` to activate the virtual environment from the <env_name> folder. (my_venv). `source` is needed when using linux and `bin` instad of `Scripts` is the folder.
 2. you run `python3 manage.py runserver` in <project_name> folder. (lecture3)
 
 ## If this does not work...

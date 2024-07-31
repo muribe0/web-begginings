@@ -27,3 +27,6 @@ class Email(models.Model):
             "read": self.read,
             "archived": self.archived
         }
+
+    def __str__(self):
+        return f"{self.user} - From {self.sender} to {set(self.recipients.all())}"

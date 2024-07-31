@@ -53,6 +53,9 @@ def compose(request):
     body = data.get("body", "")
 
     # Create one email for each recipient, plus sender
+    # so there exists one email for each user.
+    # sender has an Email instance where user == sender
+    # recipients have an Email instance where user == recipient
     users = set()
     users.add(request.user)
     users.update(recipients)
