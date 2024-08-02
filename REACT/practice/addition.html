@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- React DOM -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Addition</title>
+    <style>
+        #app {
+            text-align: center;
+            font-family: poppins sans-serif;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100px;
+            height: 30px;
+            font-size: 26px;
+            text-align: center;
+        }
+
+        #problem {
+            font-size: 72px;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        #winner {
+            color: green;
+            font-size: 72px;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="text/babel">
+
+    function App() { // JSX function
+        const [state, setState] = React.useState({
+            x: Math.ceil(Math.random() * 10),
+            y: Math.ceil(Math.random() * 10),
+            response: "",
+            score: 0,
+            iscorrect: true
+        })
+
+        function updateResponse (event) {
+            setState({
+                ...state,
+                response: event.target.value
+            })
+        }
+
+        function inputKeyPress(event) {
+            if (event.key === "Enter") {
+                const answer = parseInt(state.response);
+                if (state.x + state.y === answer) {
+                    setState({
+                        ...state,
+                        response: "",
+                        x: Math.ceil(Math.random() * 10),
+                        y: Math.ceil(Math.random() * 10),
+                        score: state.score + 1,
+                        iscorrect: true
+                    })
+                } else {
+                    setState({
+                        ...state,
+                        response: "",
+                        x: Math.ceil(Math.random() * 10),
+                        y: Math.ceil(Math.random() * 10),
+                        score: state.score - 1,
+                        iscorrect: false
+                    })
+                }
+            }
+        }
+
+        if (state.score === -5) {
+            return <div>Game Over</div>
+        } else if (state.score === 5) {
+            return <div id="winner">You Win!</div>
+        }
+
+        return (
+            <div>
+                <div className={state.iscorrect ? "" : "incorrect"} id="problem">{state.x} + {state.y}</div>
+                <input autoFocus={true} onKeyPress={inputKeyPress} onChange={updateResponse} value={state.response}/>
+                <div>Score: {state.score}</div>
+            </div>
+        )
+    }
+
+
+    ReactDOM.render(<App />, document.getElementById('app')); // render(which, where)
+
+</script>
+</body>
+</html>

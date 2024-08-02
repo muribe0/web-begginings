@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- React DOM -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>React</title>
+</head>
+<body>
+<div id="app"></div>
+
+<script type="text/babel">
+
+    function App() { // JSX function
+        const [counter, setCount] = React.useState(0);
+
+        function increment() {
+            setCount(counter + 1);
+        }
+
+        return (
+            <div>
+                <div>{counter}</div>
+                <button onClick={increment}>Increment</button>
+            </div>
+        )
+    }
+
+
+    ReactDOM.render(<App />, document.getElementById('app')); // render(which, where)
+
+</script>
+</body>
+</html>
