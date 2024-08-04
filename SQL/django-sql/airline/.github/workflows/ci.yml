@@ -1,0 +1,12 @@
+name: Testing
+on: push # This runs every time someone pushed their work to github
+
+jobs:
+  test_project: # we define a job
+    runs-on: ubuntu-latest # in which vm it will run on github servers
+    stepts: # steps when it runs
+      - uses: actions/checkout@v2 # this is a github action that checks out the code
+      - name: Run Django unit test # description of what will happen
+        run: |
+          pip3 install --user django
+          python3 manage.py test flights.tests
