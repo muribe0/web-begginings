@@ -38,3 +38,50 @@ Continuous Deployment
 
 6. **It worked!** Fixed a bug after creating the yaml action and it run green after pushing the fix.
 
+# Docker
+
+1. Create `Dockerfile` and fill it with instructions of how you would create a container.
+```dockerfile
+FROM python:3
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN pip install -r requirements.txt
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+
+` COPY . /usr/src/app` copies anything in `.` (current directory) into `/usr/src/app` in the container.
+`WORKDIR /usr/src/app` sets the working directory to `/usr/src/app` in the container.
+`RUN pip install -r requirements.txt` installs the requirements in the container.
+`CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]` runs the server in the container.
+
+Anyone using the same dockerfile will have the same environment.
+
+For the database, we can use `docker-compose.yml` file to create a database container.
+That is, so that we can have a database container and a django container running at the same time but separated.
+
+2. Create a `docker-compose.yml` file and fill it with instructions of how you would create a database container.
+```yaml
+version: '3'
+
+services:
+  db:
+    image: postgres
+
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+
+```
+
+* Specify that we’re using version 3 of Docker Compose
+* Outline two services:
+
+- db sets up our database container based on an image already written by Postgres.
+- web sets up our server’s container by instructing Docker to:
+  - Use the Dockerfile within the current directory.
+  - Use the specified path within the container.
+  - Link port 8000 within the container to port 8000 on our computer.
+
